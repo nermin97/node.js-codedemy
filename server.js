@@ -42,6 +42,7 @@ app.use((req, res, next) => {
 
 require("./routes/main")(app);
 require("./routes/user")(app);
+require("./routes/teacher")(app);
 
 app.listen(secret.port, (err) => {
   err ? console.log(err) : console.log("Running on port " + secret.port);

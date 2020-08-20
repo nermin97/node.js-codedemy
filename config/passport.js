@@ -17,33 +17,40 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(
-  new FacebookStrategy(
-    secret.facebook,
-    (req, token, refreshToken, profile, done) => {
-      User.findOne({ facebook: profile.id }, (err, user) => {
-        if (err) return done(err);
-        if (user) {
-          req.flash("loginMessage", "Successfully login with Facebook");
-          return done(null, user);
-        } else {
-          async.waterfall([
-            (callback) => {
-              var newUser = new User();
-              newUser.email = profile._json.email;
-              newUser.email = profile.id;
-              newUser.tokens.push({ kind: "facebook", token: token });
-              newUser.profile.name = profile.displayName;
-              newUser.profile.picture =
-                "https://graph.facebook.com/" +
-                profile.id +
-                "/picture?type=large";
-              newUser.save((err) => {
-                if (err) throw err;
-                req.flash("loginMessage", "Successfully login with Facebook");
-                callback(err, newUser);
-              });
-            },
-            (newUser, callback) => {
+  new FacebookStrategy(secret.facebook, function (
+    req,
+    token,
+    refreshToken,
+    profile,
+    done
+  ) {
+    console.log(profile.id);
+    User.findOne({ facebook: profile.id }, function (err, user) {
+      if (err) return done(err);
+      if (user) {
+        req.flash("loginMessage", "Successfully login with Facebook");
+        return done(null, user);
+      } else {
+        async.waterfall([
+          (callback) => {
+            var newUser = new User();
+            newUser.email = profile._json.email;
+            newUser.facebook = profile.id;
+            newUser.role = "Student";
+            newUser.tokens.push({ kind: "facebook", token: token });
+            newUser.profile.name = profile.displayName;
+            newUser.profile.picture =
+              "https://graph.facebook.com/" +
+              profile.id +
+              "/picture?type=large";
+            newUser.save((err) => {
+              if (err) throw err;
+              req.flash("loginMessage", "Successfully login with Facebook");
+              return done(err, newUser);
+              //callback(err, newUser);
+            });
+          },
+          /* (newUser, callback) => {
               request(
                 {
                   url:
@@ -68,10 +75,9 @@ passport.use(
                   }
                 }
               );
-            },
-          ]);
-        }
-      });
-    }
-  )
+            }, */
+        ]);
+      }
+    });
+  })
 );
