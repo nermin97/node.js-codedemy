@@ -91,13 +91,13 @@ module.exports = (app) => {
       });
     });
 
-    app.get("/revenue-report", (req, res, next) => {
-        var revenue = 0;
-        User.findOne({ _id: req.user._id }, (err, foundUser) => {
-            foundUser.revenue.forEach(value => {
-                revenue += value;
-            });
-            res.render("teacher/revenue-report", { revenue: revenue });
-        })
-    })
+  app.get("/revenue-report", (req, res, next) => {
+    var revenue = 0;
+    User.findOne({ _id: req.user._id }, (err, foundUser) => {
+      foundUser.revenue.forEach((value) => {
+        revenue += value.money;
+      });
+      res.render("teacher/revenue-report", { revenue: revenue });
+    });
+  });
 };

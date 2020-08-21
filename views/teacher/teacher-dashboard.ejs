@@ -8,32 +8,44 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
+<div class="container" style="margin: auto; height: 100px;">
+  <div class="column">
     <h2 class="text-center">Courses that you teach</h2>
     <hr />
-    <% for (var i = 0; i < foundUser.coursesTeach.length; i++) { %>
-    <div class="col-md-4">
-      <a
-        href="/courses/<%= foundUser.coursesTeach[i].course._id %>"
-        style="text-decoration: none; color: #34495e;"
-      >
-        <div class="panel panel-default">
-          <div
-            class="pane-body"
-            style="border: 0px; height: 250px; overflow-y: auto;"
-          >
-            <h3><%= foundUser.coursesTeach[i].course.title %></h3>
-            <p>Something is very good</p>
-            <a
-              href="/edit-course/<%= foundUser.coursesTeach[i].course._id %>"
-              class="btn btn-primary"
-              >Edit course</a
+    <div class="container-fluid">
+      <% for (var i = 0; i < foundUser.coursesTeach.length; i++) { %>
+      <div class="card" style="margin: 5px 5px 5px 5px;">
+        <a
+          href="/courses/<%= foundUser.coursesTeach[i].course._id %>"
+          style="text-decoration: none; color: #34495e;"
+        >
+          <div class="card-body">
+            <div
+              class="pane-body"
+              style="border: 0px; height: 250px; overflow-y: auto;"
             >
+              <h3 class="card-title">
+                <%= foundUser.coursesTeach[i].course.title %>
+              </h3>
+              <p class="card-text">
+                <%= foundUser.coursesTeach[i].course.desc %>
+              </p>
+              <p class="card-text">
+                Price: $<%= foundUser.coursesTeach[i].course.price/100 %>
+              </p>
+              <p class="card-text">
+                wistiID: <%= foundUser.coursesTeach[i].course.wistiaId %>
+              </p>
+              <a
+                href="/edit-course/<%= foundUser.coursesTeach[i].course._id %>"
+                class="btn btn-primary"
+                >Edit course</a
+              >
+            </div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
+      <% } %>
     </div>
-    <% } %>
   </div>
 </div>

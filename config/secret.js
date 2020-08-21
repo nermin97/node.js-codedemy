@@ -10,4 +10,10 @@ module.exports = {
     callbackURL: "http://localhost:8080/auth/facebook/callback",
     passReqToCallback: true,
   },
+  stripe: {
+    secretTestKey:
+      "sk_test_51HIdtEBVLXIEqtQE81hm26pQdEBFu6HcGw4x1NfVsVW9zfQJpLK6V7RDeE9DkXPUPn7JDt6HWmzBhC3VCsgA6ejT00829RoetT",
+    publishableTestKey:
+      "pk_test_51HIdtEBVLXIEqtQEQtrqYioyQNHqA3CgnE2IvwzkROIM6W47crqbaUsMD3wTfnC0oPd4eMKlGDbBsuuHCv3qMfL200btkst7mO",
+  },
 };

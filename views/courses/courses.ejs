@@ -1,0 +1,32 @@
+<% layout('boilerplate') %>
+
+<div class="container" style="margin: auto; height: 100px;">
+  <div class="column">
+    <h2 class="text-center">All Courses</h2>
+    <hr />
+    <div class="container-fluid">
+      <% for (var i = 0; i < courses.length; i++) { %>
+      <div class="card" style="margin: 5px 5px 5px 5px;">
+        <a
+          href="/courses/<%= courses[i]._id %>"
+          style="text-decoration: none; color: #34495e;"
+        >
+          <div class="card-body">
+            <div
+              class="pane-body"
+              style="border: 0px; height: 250px; overflow-y: auto;"
+            >
+              <h3 class="card-title"><%= courses[i].title %></h3>
+              <p class="card-text"><%= courses[i].desc %></p>
+              <p class="card-text">
+                Price: $<%= courses[i].price/100 %>
+              </p>
+              <p class="card-text">wistiID: <%= courses[i].wistiaId %></p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
